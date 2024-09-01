@@ -26,6 +26,10 @@ async def server(db_config):
     pg.pool = await create_pool(db_config)
     pg.conn = await pg.pool.acquire()
 
+async def ensure_pg_conn_ready():
+    while not hasattr(pg, 'conn') or pg.conn is None:
+        await asyncio.sleep(1)
+
 async def notify_handler(connection, pid, channel, payload):
     message = json.loads(payload)
     async with subscribers_lock:

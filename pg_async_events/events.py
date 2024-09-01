@@ -21,7 +21,7 @@ async def create_pool(db_config):
         max_size=db_config['max_connections']+1
     )
 
-async def server(db_config):
+async def initialize(db_config):
     global pg
     pg.pool = await create_pool(db_config)
     pg.conn = await pg.pool.acquire()

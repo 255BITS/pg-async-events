@@ -36,11 +36,7 @@ db_config = {
 
 @app.before_serving
 async def setup():
-    app.task_events = asyncio.create_task(events.server(db_config))
-
-@app.after_serving
-async def cleanup():
-    app.task_events.cancel()
+    await events.initialize(db_config)
 ```
 
 

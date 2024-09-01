@@ -1,7 +1,7 @@
-from .events import create_pool, server, notify_handler, ensure_pg_conn_ready, add_listener, notify, subscribe
+from .events import initialize, notify, subscribe
 
 __all__ = [
-    'server', 
+    'initialize',
     'notify', 
     'subscribe'
 ]

@@ -10,20 +10,9 @@ class PG:
 
 pg = PG()
 
-async def create_pool(db_config):
-    return await asyncpg.create_pool(
-        user=db_config['user'],
-        password=db_config['password'],
-        database=db_config['database'],
-        host=db_config['host'],
-        port=db_config['port'],
-        min_size=db_config['max_connections'],
-        max_size=db_config['max_connections']+1
-    )
-
-async def initialize(db_config):
+async def initialize(pool):
     global pg
-    pg.pool = await create_pool(db_config)
+    pg.pool = pool
     pg.conn = await pg.pool.acquire()
 
 async def ensure_pg_conn_ready():

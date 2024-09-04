@@ -23,6 +23,7 @@ pip install pg_async_events
 ### Quart
 
 ```python
+import asyncpg
 import pg_async_events as events
 
 # Add your postgres credentials from the env
@@ -31,12 +32,14 @@ db_config = {
     "password": POSTGRES_PASSWORD,
     "host": POSTGRES_HOST,
     "port": POSTGRES_PORT,
-    "max_connections": 1,
+    "min_size": 1,
+    "max_size": 5,
 }
 
 @app.before_serving
 async def setup():
-    await events.initialize(db_config)
+    pool = await asyncpg.create_pool(**db_config)
+    await events.initialize(pool)
 ```
 
 

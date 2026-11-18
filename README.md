@@ -79,3 +79,9 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 * asyncpg for providing the asynchronous PostgreSQL driver.
 * PostgreSQL community for their robust database and features like LISTEN/NOTIFY.
 
+## GitHub source releases
+
+Update the package version in `setup.py` in the release PR. When the version
+change reaches `main`, the distribution build and tests qualify the exact
+commit for a GitHub release tagged `v<version>`. PyPI publishing runs as a
+separate job.
